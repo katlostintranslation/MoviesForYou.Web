@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoviesForYou.Data;
 
@@ -11,9 +12,10 @@ using MoviesForYou.Data;
 namespace MoviesForYou.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221103190906_GustsTest")]
+    partial class GustsTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace MoviesForYou.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("KeywordMovie", b =>
-                {
-                    b.Property<int>("KeywordsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MoviesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("KeywordsId", "MoviesId");
-
-                    b.HasIndex("MoviesId");
-
-                    b.ToTable("KeywordMovie");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -273,6 +260,9 @@ namespace MoviesForYou.Data.Migrations
                     b.Property<int?>("Genre")
                         .HasColumnType("int");
 
+                    b.Property<int?>("KeywordId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -280,22 +270,9 @@ namespace MoviesForYou.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("KeywordId");
+
                     b.ToTable("Movies");
-                });
-
-            modelBuilder.Entity("KeywordMovie", b =>
-                {
-                    b.HasOne("MoviesForYou.Data.Models.Keyword", null)
-                        .WithMany()
-                        .HasForeignKey("KeywordsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MoviesForYou.Data.Models.Movie", null)
-                        .WithMany()
-                        .HasForeignKey("MoviesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -347,6 +324,20 @@ namespace MoviesForYou.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MoviesForYou.Data.Models.Movie", b =>
+                {
+                    b.HasOne("MoviesForYou.Data.Models.Keyword", "Keyword")
+                        .WithMany("Movies")
+                        .HasForeignKey("KeywordId");
+
+                    b.Navigation("Keyword");
+                });
+
+            modelBuilder.Entity("MoviesForYou.Data.Models.Keyword", b =>
+                {
+                    b.Navigation("Movies");
                 });
 #pragma warning restore 612, 618
         }

@@ -15,8 +15,6 @@ namespace MoviesForYou.Data.Models
         [MaxLength(100)]
         public string Value { get; set; }
 
-       
-
         public List<Movie> Movies { get; set; } = new List<Movie>();
 
     }

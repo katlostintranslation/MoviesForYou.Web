@@ -17,11 +17,9 @@ namespace MoviesForYou.Data.Models
         [MaxLength(100)]
         public string Description { get; set; }
 
-        public Keyword? Keyword { get; set; }
-
-        public int? KeywordId { get; set; }
-
         public MovieGenreEnum? Genre { get; set; }
+
+        public List<Keyword> Keywords { get; set; } = new List<Keyword>();
 
     }
 }
