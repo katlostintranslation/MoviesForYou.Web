@@ -1,0 +1,40 @@
+﻿@page
+@model MoviesForYou.Web.Pages.Keywords.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Look for keywords to find your perfect movie</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Keyword[0].Value)
+            </th>
+           @* <th>
+                @Html.DisplayNameFor(model => model.Keyword[0].MovieTitle)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Keyword) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+           
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

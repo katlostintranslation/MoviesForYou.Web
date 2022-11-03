@@ -1,0 +1,77 @@
+﻿@page
+@model MoviesForYou.Web.Pages.Movies.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Movie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Movie.Title" class="control-label"></label>
+                <input asp-for="Movie.Title" class="form-control" />
+                <span asp-validation-for="Movie.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movie.Description" class="control-label"></label>
+                <input asp-for="Movie.Description" class="form-control" />
+                <span asp-validation-for="Movie.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movie.Keyword" class="control-label"></label>
+                <select class="js-example-basic-single form-control" id="movieKeyword" name="Movie.Keyword">
+                 <option value=""></option>
+                 <option value="LO">Love</option>
+                <option value="FA">Family</option>
+                <option value="FA">Don't want to add keyword</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Movie.Genre" class="control-label"></label>
+                <select  asp-for="Movie.Genre" class="js-example-basic-single form-control" id="movieGenre" >
+                 <option value=""></option>
+                 <option value="DN">Don't know genre</option>
+                 <option value="AC">Action</option>
+                <option value="AD">Adventure</option>
+                <option value="CO">Comedy</option>
+                <option value="DR">Drama</option>
+                <option value="FA">Fantasy</option>
+                <option value="HO">Horror</option>
+                <option value="MU">Musicals</option>
+                <option value="MY">Mystery</option>
+                <option value="RO">Romance</option>
+                <option value="SC">Science Fiction</option>
+                <option value="SP">Sports</option>
+                <option value="TH">Thriller</option>
+                <option value="WE">Western</option>
+                
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+  <script>
+    
+$(document).ready(function() {
+    $('#movieKeyword').select2();
+    $('#movieGenre').select2();
+});
+
+</script>
