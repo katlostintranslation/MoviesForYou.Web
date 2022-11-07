@@ -44,7 +44,7 @@ namespace MoviesForYou.Web.Pages.Movies
                 new SelectListItem("-","")
             };
 
-            allKeywords.AddRange(_context.Keywords.Select(o => new SelectListItem( o.Value, o.Id.ToString())));
+            allKeywords.AddRange(_context.Keywords.Select(o => new SelectListItem(o.Value, o.Id.ToString())));
 
             AllKeywords = allKeywords;
 

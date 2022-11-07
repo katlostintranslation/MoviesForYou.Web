@@ -25,7 +25,7 @@ namespace MoviesForYou.Web.Pages.Keywords
         {
             if (_context.Keywords != null)
             {
-                Keyword = await _context.Keywords.ToListAsync();
+                Keyword = await _context.Keywords.Include(m=>m.Movies).ToListAsync();
             }
         }
     }
